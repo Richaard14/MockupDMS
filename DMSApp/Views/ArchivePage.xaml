@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMSApp.Views.ArchivePage"
+             Title="Archive"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <Grid ColumnDefinitions="250, *">
+
+        <!-- ============================================== -->
+        <!-- SISI KIRI: SIDEBAR -->
+        <!-- ============================================== -->
+        <Grid Grid.Column="0" BackgroundColor="#0F172A" RowDefinitions="Auto, *, Auto" Padding="15,20,15,20">
+
+            <!-- Logo -->
+            <HorizontalStackLayout Grid.Row="0" Spacing="10" Margin="10,0,0,30">
+                <Border BackgroundColor="#3B82F6" WidthRequest="45" HeightRequest="30" StrokeShape="RoundRectangle 6" StrokeThickness="0">
+                    <Label Text="LOGO" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Border>
+                <Label Text="DMS" TextColor="White" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Menu Items -->
+            <VerticalStackLayout Grid.Row="1" Spacing="5">
+                <!-- Inactive Home -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Home" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Inactive My Documents -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMyDocumentsTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="My Documents" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Inactive Create Document -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCreateDocumentTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Create Document" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Inactive Document Library -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDocumentLibraryTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Document Library" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Inactive Tracking & Trace -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTrackingTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Tracking &amp; Trace" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- ACTIVE MENU: Archive -->
+                <Border BackgroundColor="#3B82F6" StrokeShape="RoundRectangle 8" StrokeThickness="0" Padding="15,12">
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Archive" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Inactive Settings -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <Label Text="Settings" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- User Profile Bottom -->
+            <Grid Grid.Row="2" ColumnDefinitions="Auto, *, Auto" Padding="10">
+                <Border Grid.Column="0" WidthRequest="35" HeightRequest="35" StrokeShape="RoundRectangle 17.5" StrokeThickness="0" BackgroundColor="#E2E8F0">
+                    <Label Text="👤" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
+                    <Label Text="User" TextColor="White" FontSize="13" FontAttributes="Bold" />
+                    <Label Text="Document Control" TextColor="#94A3B8" FontSize="11" />
+                </VerticalStackLayout>
+                <Label Grid.Column="2" Text="⋮" TextColor="#94A3B8" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+
+        <!-- ============================================== -->
+        <!-- SISI KANAN: MAIN CONTENT (ARCHIVE) -->
+        <!-- ============================================== -->
+        <ScrollView Grid.Column="1">
+            <VerticalStackLayout Padding="30" Spacing="20">
+
+                <!-- Header Top Bar: Search & Profile Icons -->
+                <Grid ColumnDefinitions="*, Auto" RowDefinitions="50">
+                    <Border Grid.Column="0" StrokeShape="RoundRectangle 25" BackgroundColor="White" Stroke="#E2E8F0" StrokeThickness="1" Padding="15,0" HorizontalOptions="Start" WidthRequest="400">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="🔍" TextColor="#94A3B8" VerticalOptions="Center" />
+                            <Entry Placeholder="Search..." WidthRequest="330" BackgroundColor="Transparent" TextColor="#1E293B" />
+                        </HorizontalStackLayout>
+                    </Border>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="20" VerticalOptions="Center">
+                        <Label Text="🔔" FontSize="20" TextColor="#EAB308" VerticalOptions="Center" />
+                        <Border WidthRequest="35" HeightRequest="35" StrokeShape="RoundRectangle 17.5" StrokeThickness="0" BackgroundColor="#E2E8F0">
+                            <Label Text="👤" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <!-- Page Header Title & Read-Only Notice -->
+                <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Document Archive" FontSize="22" FontAttributes="Bold" TextColor="#1E293B" />
+                        <Label Text="Kumpulan dokumen masa lalu dan expired. Hanya dapat dilihat (Read-Only)." FontSize="14" TextColor="#64748B" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Search & Filter Bar -->
+                <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="15">
+                    <Border Grid.Column="0" StrokeShape="RoundRectangle 8" BackgroundColor="White" Stroke="#E2E8F0" StrokeThickness="1" Padding="15,0" HeightRequest="45">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="🔍" TextColor="#94A3B8" VerticalOptions="Center" />
+                            <Entry Placeholder="Search archived documents by title or number..." BackgroundColor="Transparent" TextColor="#1E293B" HorizontalOptions="FillAndExpand" WidthRequest="450" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Filter Year -->
+                    <Border Grid.Column="1" StrokeShape="RoundRectangle 8" BackgroundColor="White" Stroke="#E2E8F0" StrokeThickness="1" Padding="15,0" HeightRequest="45">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="All Years" FontSize="13" TextColor="#475569" VerticalOptions="Center"/>
+                            <Label Text="˅" FontSize="12" TextColor="#94A3B8" FontAttributes="Bold" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Filter Category -->
+                    <Border Grid.Column="2" StrokeShape="RoundRectangle 8" BackgroundColor="White" Stroke="#E2E8F0" StrokeThickness="1" Padding="15,0" HeightRequest="45">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="All Categories" FontSize="13" TextColor="#475569" VerticalOptions="Center"/>
+                            <Label Text="˅" FontSize="12" TextColor="#94A3B8" FontAttributes="Bold" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Archived Documents Table -->
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="White" Stroke="#E2E8F0" StrokeThickness="1" Padding="0" Margin="0,5,0,0">
+                    <VerticalStackLayout>
+
+                        <!-- Table Header -->
+                        <Grid ColumnDefinitions="40, 2.5*, 1.5*, 1.2*, 1.2*, 1.2*, Auto" Padding="20,15" BackgroundColor="#F8FAFC">
+                            <Label Grid.Column="0" Text="No." FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                            <Label Grid.Column="1" Text="Document Title" FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Text="Category" FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                            <Label Grid.Column="3" Text="Expiry Date" FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                            <Label Grid.Column="4" Text="Archived Date" FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                            <Label Grid.Column="5" Text="Status" FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                            <Label Grid.Column="6" Text="Action" FontSize="12" TextColor="#64748B" FontAttributes="Bold"/>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#E2E8F0" />
+
+                        <!-- Data Row 1 -->
+                        <Grid ColumnDefinitions="40, 2.5*, 1.5*, 1.2*, 1.2*, 1.2*, Auto" Padding="20,15" VerticalOptions="Center">
+                            <Label Grid.Column="0" Text="1" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Contoh dokumen 1" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="HR" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="3" Text="31 Dec 2020" FontSize="13" TextColor="#EF4444" VerticalOptions="Center"/>
+                            <Label Grid.Column="4" Text="02 Jan 2021" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Border Grid.Column="5" BackgroundColor="#F1F5F9" StrokeShape="RoundRectangle 12" StrokeThickness="0" Padding="10,4" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label Text="Expired" FontSize="11" TextColor="#64748B" FontAttributes="Bold" />
+                            </Border>
+                            <Button Grid.Column="6" Text="👁️ View" Clicked="OnViewDocumentClicked" BackgroundColor="#F1F5F9" TextColor="#0D6EFD" FontSize="12" FontAttributes="Bold" CornerRadius="6" HeightRequest="32" Padding="12,0"/>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#F1F5F9" />
+
+                        <!-- Data Row 2 -->
+                        <Grid ColumnDefinitions="40, 2.5*, 1.5*, 1.2*, 1.2*, 1.2*, Auto" Padding="20,15" VerticalOptions="Center">
+                            <Label Grid.Column="0" Text="2" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Contoh dokumen 2" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="Procurement" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="3" Text="15 Aug 2021" FontSize="13" TextColor="#EF4444" VerticalOptions="Center"/>
+                            <Label Grid.Column="4" Text="20 Aug 2021" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Border Grid.Column="5" BackgroundColor="#F1F5F9" StrokeShape="RoundRectangle 12" StrokeThickness="0" Padding="10,4" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label Text="Archived" FontSize="11" TextColor="#64748B" FontAttributes="Bold" />
+                            </Border>
+                            <Button Grid.Column="6" Text="👁️ View" Clicked="OnViewDocumentClicked" BackgroundColor="#F1F5F9" TextColor="#0D6EFD" FontSize="12" FontAttributes="Bold" CornerRadius="6" HeightRequest="32" Padding="12,0"/>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#F1F5F9" />
+
+                        <!-- Data Row 3 -->
+                        <Grid ColumnDefinitions="40, 2.5*, 1.5*, 1.2*, 1.2*, 1.2*, Auto" Padding="20,15" VerticalOptions="Center">
+                            <Label Grid.Column="0" Text="3" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Contoh dokumen 3" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="Finance" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="3" Text="30 Apr 2020" FontSize="13" TextColor="#EF4444" VerticalOptions="Center"/>
+                            <Label Grid.Column="4" Text="05 May 2020" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Border Grid.Column="5" BackgroundColor="#F1F5F9" StrokeShape="RoundRectangle 12" StrokeThickness="0" Padding="10,4" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label Text="Archived" FontSize="11" TextColor="#64748B" FontAttributes="Bold" />
+                            </Border>
+                            <Button Grid.Column="6" Text="👁️ View" Clicked="OnViewDocumentClicked" BackgroundColor="#F1F5F9" TextColor="#0D6EFD" FontSize="12" FontAttributes="Bold" CornerRadius="6" HeightRequest="32" Padding="12,0"/>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#F1F5F9" />
+
+                        <!-- Data Row 4 -->
+                        <Grid ColumnDefinitions="40, 2.5*, 1.5*, 1.2*, 1.2*, 1.2*, Auto" Padding="20,15" VerticalOptions="Center">
+                            <Label Grid.Column="0" Text="4" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Contoh dokumen 4" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="IT &amp; Systems" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="3" Text="10 Oct 2022" FontSize="13" TextColor="#EF4444" VerticalOptions="Center"/>
+                            <Label Grid.Column="4" Text="12 Oct 2022" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Border Grid.Column="5" BackgroundColor="#F1F5F9" StrokeShape="RoundRectangle 12" StrokeThickness="0" Padding="10,4" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label Text="Expired" FontSize="11" TextColor="#64748B" FontAttributes="Bold" />
+                            </Border>
+                            <Button Grid.Column="6" Text="👁️ View" Clicked="OnViewDocumentClicked" BackgroundColor="#F1F5F9" TextColor="#0D6EFD" FontSize="12" FontAttributes="Bold" CornerRadius="6" HeightRequest="32" Padding="12,0"/>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#F1F5F9" />
+
+                        <!-- Data Row 5 -->
+                        <Grid ColumnDefinitions="40, 2.5*, 1.5*, 1.2*, 1.2*, 1.2*, Auto" Padding="20,15" VerticalOptions="Center">
+                            <Label Grid.Column="0" Text="5" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Contoh dokumen 5" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="Legal" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Label Grid.Column="3" Text="01 Jun 2023" FontSize="13" TextColor="#EF4444" VerticalOptions="Center"/>
+                            <Label Grid.Column="4" Text="05 Jun 2023" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            <Border Grid.Column="5" BackgroundColor="#F1F5F9" StrokeShape="RoundRectangle 12" StrokeThickness="0" Padding="10,4" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label Text="Archived" FontSize="11" TextColor="#64748B" FontAttributes="Bold" />
+                            </Border>
+                            <Button Grid.Column="6" Text="👁️ View" Clicked="OnViewDocumentClicked" BackgroundColor="#F1F5F9" TextColor="#0D6EFD" FontSize="12" FontAttributes="Bold" CornerRadius="6" HeightRequest="32" Padding="12,0"/>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#E2E8F0" />
+
+                        <!-- Table Footer / Pagination -->
+                        <Grid ColumnDefinitions="*, Auto" Padding="20,15" VerticalOptions="Center">
+                            <HorizontalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+                                <Border StrokeShape="RoundRectangle 6" Stroke="#E2E8F0" StrokeThickness="1" WidthRequest="32" HeightRequest="32" BackgroundColor="White">
+                                    <Label Text="‹" FontSize="16" TextColor="#64748B" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+                                <Border StrokeShape="RoundRectangle 6" StrokeThickness="0" WidthRequest="32" HeightRequest="32" BackgroundColor="#0D6EFD">
+                                    <Label Text="1" FontSize="13" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+                                <Border StrokeShape="RoundRectangle 6" Stroke="#E2E8F0" StrokeThickness="1" WidthRequest="32" HeightRequest="32" BackgroundColor="White">
+                                    <Label Text="2" FontSize="13" TextColor="#64748B" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+                                <Border StrokeShape="RoundRectangle 6" Stroke="#E2E8F0" StrokeThickness="1" WidthRequest="32" HeightRequest="32" BackgroundColor="White">
+                                    <Label Text="3" FontSize="13" TextColor="#64748B" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+                                <Border StrokeShape="RoundRectangle 6" Stroke="#E2E8F0" StrokeThickness="1" WidthRequest="32" HeightRequest="32" BackgroundColor="White">
+                                    <Label Text="›" FontSize="16" TextColor="#64748B" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+                            </HorizontalStackLayout>
+
+                            <Label Grid.Column="1" Text="Showing 1-5 of 128 archived documents" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

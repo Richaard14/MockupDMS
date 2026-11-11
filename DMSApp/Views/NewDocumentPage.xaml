@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMSApp.Views.NewDocumentPage"
+             Title="Create Document"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <Grid ColumnDefinitions="250, *">
+
+        <!-- ============================================== -->
+        <!-- SISI KIRI: SIDEBAR -->
+        <!-- ============================================== -->
+        <Grid Grid.Column="0" BackgroundColor="#0F172A" RowDefinitions="Auto, *, Auto" Padding="15,20,15,20">
+
+            <!-- Logo -->
+            <HorizontalStackLayout Grid.Row="0" Spacing="10" Margin="10,0,0,30">
+                <Frame BackgroundColor="#3B82F6" WidthRequest="45" HeightRequest="30" CornerRadius="6" Padding="0" HasShadow="False">
+                    <Label Text="LOGO" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Frame>
+                <Label Text="DMS" TextColor="White" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Menu Items -->
+            <VerticalStackLayout Grid.Row="1" Spacing="5">
+                <!-- Inactive Home -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Home" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Inactive My Documents -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMyDocumentsTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="My Documents" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- ACTIVE MENU: Create Document -->
+                <Frame BackgroundColor="#3B82F6" CornerRadius="8" Padding="15,12" HasShadow="False" BorderColor="Transparent">
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Create Document" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- Inactive Menus -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDocumentLibraryTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Document Library" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTrackingTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Tracking &amp; Trace" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <Label Text="Archive" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <Label Text="Settings" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- User Profile Bottom -->
+            <Grid Grid.Row="2" ColumnDefinitions="Auto, *, Auto" Padding="10">
+                <Frame Grid.Column="0" WidthRequest="35" HeightRequest="35" CornerRadius="17.5" Padding="0" HasShadow="False" BackgroundColor="#E2E8F0">
+                    <Label Text="👤" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
+                    <Label Text="User" TextColor="White" FontSize="13" FontAttributes="Bold" />
+                    <Label Text="Document Control" TextColor="#94A3B8" FontSize="11" />
+                </VerticalStackLayout>
+                <Label Grid.Column="2" Text="⋮" TextColor="#94A3B8" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+
+        <!-- ============================================== -->
+        <!-- SISI KANAN: MAIN CONTENT (CREATE DOCUMENT) -->
+        <!-- ============================================== -->
+        <ScrollView Grid.Column="1">
+            <VerticalStackLayout Padding="30" Spacing="25">
+
+                <!-- Header: Search & Icons -->
+                <Grid ColumnDefinitions="*, Auto" RowDefinitions="50">
+                    <Frame Grid.Column="0" CornerRadius="25" BackgroundColor="White" BorderColor="#E2E8F0" HasShadow="False" Padding="15,0" HorizontalOptions="Start" WidthRequest="400">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="🔍" TextColor="#94A3B8" VerticalOptions="Center" />
+                            <Entry Placeholder="Search..." WidthRequest="330" BackgroundColor="Transparent" TextColor="#1E293B" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="20" VerticalOptions="Center">
+                        <Label Text="🔔" FontSize="20" TextColor="#64748B" VerticalOptions="Center" />
+                        <Frame WidthRequest="35" HeightRequest="35" CornerRadius="17.5" Padding="0" HasShadow="False" BackgroundColor="#E2E8F0">
+                            <Label Text="👤" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <!-- Main Card: Create Document -->
+                <Frame BackgroundColor="White" CornerRadius="12" HasShadow="True" BorderColor="Transparent" Padding="40" Margin="0,10,0,0" MaximumWidthRequest="938" HorizontalOptions="Start">
+                    <VerticalStackLayout Spacing="25">
+
+                        <!-- Card Header -->
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="Create Document" FontSize="22" FontAttributes="Bold" TextColor="#1E293B" />
+                                <Label Text="Select a method." FontSize="14" TextColor="#64748B" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <!-- Method Options (Builder vs Upload) -->
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="20">
+
+                            <!-- Option 1: Document Builder -->
+                            <Border Grid.Column="0" BackgroundColor="#F8FAFC" Stroke="#E2E8F0" StrokeThickness="1" Padding="25">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+                                <VerticalStackLayout Spacing="15">
+                                    <Border BackgroundColor="#DBEAFE" WidthRequest="45" HeightRequest="45" StrokeShape="RoundRectangle 22.5" StrokeThickness="0" HorizontalOptions="Start">
+                                    </Border>
+                                    <Label Text="Document Builder" FontSize="16" FontAttributes="Bold" TextColor="#1E293B" />
+                                    <Label Text="Buat dokumen dari template atau kosong, lalu edit langsung di editor." FontSize="13" TextColor="#64748B" LineHeight="1.4" HeightRequest="50" />
+                                    <Button Text="Start Building ➔" BackgroundColor="#0D6EFD" TextColor="White" FontAttributes="Bold" CornerRadius="8" HeightRequest="45" Margin="0,10,0,0"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <!-- Option 2: Upload Document -->
+                            <Border Grid.Column="1" BackgroundColor="#F8FAFC" Stroke="#E2E8F0" StrokeThickness="1" Padding="25">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+                                <VerticalStackLayout Spacing="15">
+                                    <Border BackgroundColor="#DBEAFE" WidthRequest="45" HeightRequest="45" StrokeShape="RoundRectangle 22.5" StrokeThickness="0" HorizontalOptions="Start">
+                                    </Border>
+                                    <Label Text="Upload Document" FontSize="16" FontAttributes="Bold" TextColor="#1E293B" />
+                                    <Label Text="Unggah file dari perangkat Anda (PDF, DOCX, XLSX, dll)." FontSize="13" TextColor="#64748B" LineHeight="1.4" HeightRequest="50" />
+                                    <Button Text="Upload File" BackgroundColor="White" TextColor="#0D6EFD" BorderColor="#E2E8F0" BorderWidth="1" FontAttributes="Bold" CornerRadius="8" HeightRequest="45" Margin="0,10,0,0"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#E2E8F0" Margin="0,10" />
+
+                        <!-- Templates Section -->
+                        <VerticalStackLayout Spacing="15">
+                            <Label Text="Or Use a Template" FontSize="15" FontAttributes="Bold" TextColor="#1E293B" />
+
+                            <!-- Search Template -->
+                            <Frame CornerRadius="8" BackgroundColor="White" BorderColor="#E2E8F0" HasShadow="False" Padding="15,0" HeightRequest="45">
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <Label Text="🔍" TextColor="#94A3B8" VerticalOptions="Center" />
+                                    <Entry Placeholder="Search template..." BackgroundColor="Transparent" TextColor="#1E293B" WidthRequest="500" />
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!-- Template List -->
+                            <VerticalStackLayout Spacing="10">
+
+                                <!-- Item 1 -->
+                                <Frame BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="8" Padding="15" HasShadow="False">
+                                    <Grid ColumnDefinitions="Auto, *, Auto">
+                                        <Frame Grid.Column="0" BackgroundColor="#EFF6FF" WidthRequest="30" HeightRequest="30" CornerRadius="6" Padding="0" HasShadow="False" Margin="0,0,15,0">
+                                        </Frame>
+                                        <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                            <Label Text="Contoh Tamplate dokumen 1" FontSize="14" FontAttributes="Bold" TextColor="#1E293B" />
+                                            <Label Text="(HR)" FontSize="14" TextColor="#94A3B8" />
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Column="2" Text="❯" FontSize="16" TextColor="#94A3B8" FontAttributes="Bold" VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+
+                                <!-- Item 2 -->
+                                <Frame BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="8" Padding="15" HasShadow="False">
+                                    <Grid ColumnDefinitions="Auto, *, Auto">
+                                        <Frame Grid.Column="0" BackgroundColor="#EFF6FF" WidthRequest="30" HeightRequest="30" CornerRadius="6" Padding="0" HasShadow="False" Margin="0,0,15,0">
+                                        </Frame>
+                                        <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                            <Label Text="Contoh Tamplate dokumen 2" FontSize="14" FontAttributes="Bold" TextColor="#1E293B" />
+                                            <Label Text="(Procurement)" FontSize="14" TextColor="#94A3B8" />
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Column="2" Text="❯" FontSize="16" TextColor="#94A3B8" FontAttributes="Bold" VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

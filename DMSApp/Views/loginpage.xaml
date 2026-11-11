@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMSApp.Views.loginpage"
+             Title="loginpage"
+             Shell.NavBarIsVisible="False">
+
+    <!-- Membagi layar menjadi dua kolom sama besar untuk layout desktop/tablet -->
+    <Grid ColumnDefinitions="*,*">
+
+        <!-- ============================================== -->
+        <!-- SISI KIRI: Branding & Informasi -->
+        <!-- ============================================== -->
+        <Grid Grid.Column="0" BackgroundColor="#113155">
+            <!-- Catatan: Tambahkan elemen Image di sini jika Anda memiliki aset gambar gunung untuk latar belakang -->
+            <!-- <Image Source="mountain_bg.jpg" Aspect="AspectFill" Opacity="0.4" /> -->
+
+            <VerticalStackLayout Margin="60,0,60,0" VerticalOptions="Center" Spacing="20">
+
+                <!-- Logo & Nama Aplikasi -->
+                <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                    <!-- Placeholder Logo (Ganti dengan Image asli jika ada) -->
+                    <Grid WidthRequest="50" HeightRequest="40">
+                        <Polygon Points="0,40 15,10 30,40" Fill="#4DA8DA" Opacity="0.8"/>
+                        <Polygon Points="20,40 35,0 50,40" Fill="#2196F3" />
+                    </Grid>
+                    <Label Text="DMS" FontSize="32" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- Judul -->
+                <Label Text="Document&#x0a;Management System"
+                       FontSize="50" FontAttributes="Bold" TextColor="White" LineBreakMode="WordWrap" />
+
+                <!-- Subjudul -->
+                <Label Text="Create, Approve, Sign, Track, Archive."
+                       FontSize="16" TextColor="#A0B5CB" Margin="0,10,0,0" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- ============================================== -->
+        <!-- SISI KANAN: Formulir Login -->
+        <!-- ============================================== -->
+        <Grid Grid.Column="1" BackgroundColor="#F8FAFC" Padding="40">
+
+            <!-- Kartu Putih -->
+            <Frame BackgroundColor="White" CornerRadius="12" HasShadow="True" 
+                   Padding="40,50" VerticalOptions="Center" HorizontalOptions="Center" 
+                   WidthRequest="420" BorderColor="Transparent">
+
+                <VerticalStackLayout Spacing="15">
+                    <!-- Header Form -->
+                    <Label Text="Welcome to DMS" FontSize="24" FontAttributes="Bold" TextColor="#1E293B" HorizontalOptions="Center" />
+                    <Label Text="Sign in to access your account" FontSize="14" TextColor="#64748B" HorizontalOptions="Center" Margin="0,0,0,15"/>
+
+                    <!-- Input Email/Username -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Email" FontSize="13" TextColor="#475569" FontAttributes="Bold" />
+                        <Frame BorderColor="#E2E8F0" BackgroundColor="White" Padding="12,0" CornerRadius="8" HeightRequest="45" HasShadow="False">
+                            <!-- Catatan: Untuk icon di dalam Entry, MAUI membutuhkan handler khusus atau Image berjejer, di sini dibuat simpel -->
+                            <Entry Placeholder="richard12@gmail.com" TextColor="#1E293B" PlaceholderColor="#94A3B8" BackgroundColor="Transparent" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Input Password -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Password" FontSize="13" TextColor="#475569" FontAttributes="Bold" />
+                        <Frame BorderColor="#E2E8F0" BackgroundColor="White" Padding="12,0" CornerRadius="8" HeightRequest="45" HasShadow="False">
+                            <Entry Placeholder="********" IsPassword="True" TextColor="#1E293B" PlaceholderColor="#94A3B8" BackgroundColor="Transparent" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <Grid ColumnDefinitions="Auto, *" Margin="0,5,0,15">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+                            <CheckBox IsChecked="True" Color="#0D6EFD" WidthRequest="25" HeightRequest="25" />
+                            <Label Text="Remember me" FontSize="13" TextColor="#475569" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <Label Grid.Column="1" Text="Forgot password?" FontSize="13" TextColor="#0D6EFD" FontAttributes="Bold" 
+                               HorizontalOptions="End" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <!-- Tombol Sign In -->
+                    <Button Text="Sign In" Clicked="OnSignInClicked" BackgroundColor="#0D6EFD" TextColor="White" FontAttributes="Bold" CornerRadius="8" HeightRequest="45" />
+
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMSApp.Views.DashboardPage"
+             Title="Dashboard"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8FAFC">
+
+    <Grid ColumnDefinitions="250, *">
+
+        <!-- ============================================== -->
+        <!-- SISI KIRI: SIDEBAR -->
+        <!-- ============================================== -->
+        <Grid Grid.Column="0" BackgroundColor="#0F172A" RowDefinitions="Auto, *, Auto" Padding="15,20,15,20">
+
+            <!-- Logo -->
+            <HorizontalStackLayout Grid.Row="0" Spacing="10" Margin="10,0,0,30">
+                <Frame BackgroundColor="#3B82F6" WidthRequest="45" HeightRequest="30" CornerRadius="6" Padding="0" HasShadow="False">
+                    <Label Text="LOGO" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Frame>
+                <Label Text="DMS" TextColor="White" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Menu Items -->
+            <VerticalStackLayout Grid.Row="1" Spacing="5">
+                <!-- Active Menu -->
+                <Frame BackgroundColor="#3B82F6" CornerRadius="8" Padding="15,12" HasShadow="False" BorderColor="Transparent">
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Home" TextColor="White" FontAttributes="Bold" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                <!-- Inactive Menus -->
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMyDocumentsTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="My Documents" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCreateDocumentTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Create Document" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDocumentLibraryTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Document Library" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTrackingTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Tracking &amp; Trace" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnArchiveTapped"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label Text="Archive" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15" Padding="15,12">
+                    <Label Text="Settings" TextColor="#94A3B8" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- User Profile Bottom -->
+            <Grid Grid.Row="2" ColumnDefinitions="Auto, *, Auto" Padding="10">
+                <Frame Grid.Column="0" WidthRequest="35" HeightRequest="35" CornerRadius="17.5" Padding="0" HasShadow="False" BackgroundColor="#E2E8F0">
+                    <Label Text="👤" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
+                    <Label Text="USER" TextColor="White" FontSize="13" FontAttributes="Bold" />
+                    <Label Text="Document Control" TextColor="#94A3B8" FontSize="11" />
+                </VerticalStackLayout>
+                <Label Grid.Column="2" Text="⋮" TextColor="#94A3B8" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+
+        <!-- ============================================== -->
+        <!-- SISI KANAN: MAIN CONTENT (DASHBOARD) -->
+        <!-- ============================================== -->
+        <ScrollView Grid.Column="1">
+            <VerticalStackLayout Padding="30" Spacing="25">
+
+                <!-- Header: Search & Icons -->
+                <Grid ColumnDefinitions="*, Auto" RowDefinitions="50">
+                    <Frame Grid.Column="0" CornerRadius="25" BackgroundColor="White" BorderColor="#E2E8F0" HasShadow="False" Padding="15,0" HorizontalOptions="Start" WidthRequest="400">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="🔍" TextColor="#94A3B8" VerticalOptions="Center" />
+                            <Entry Placeholder="Search document, number, or keyword..." WidthRequest="330" BackgroundColor="Transparent" TextColor="#1E293B" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="20" VerticalOptions="Center">
+                        <Label Text="🔔" FontSize="20" TextColor="#64748B" VerticalOptions="Center" />
+                        <Frame WidthRequest="35" HeightRequest="35" CornerRadius="17.5" Padding="0" HasShadow="False" BackgroundColor="#E2E8F0">
+                            <Label Text="👤" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <!-- Welcome Text -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Good Morning, User" FontSize="24" FontAttributes="Bold" TextColor="#1E293B" />
+                    <Label Text="Manage your documents, track approvals, and keep everything in one place." FontSize="14" TextColor="#64748B" />
+                </VerticalStackLayout>
+
+                <!-- Stats Cards -->
+                <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="15">
+                    <!-- Card 1 -->
+                    <Frame Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Total Documents" FontSize="13" TextColor="#64748B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Text="2" FontSize="26" FontAttributes="Bold" TextColor="#1E293B" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <!-- Card 2 -->
+                    <Frame Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Pending Approval" FontSize="13" TextColor="#64748B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Text="1" FontSize="26" FontAttributes="Bold" TextColor="#1E293B" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <!-- Card 3 -->
+                    <Frame Grid.Column="2" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Expiring Soon" FontSize="13" TextColor="#64748B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Text="1" FontSize="26" FontAttributes="Bold" TextColor="#1E293B" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <!-- Card 4 -->
+                    <Frame Grid.Column="3" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Overdue" FontSize="13" TextColor="#64748B" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Text="-" FontSize="26" FontAttributes="Bold" TextColor="#1E293B" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Quick Actions -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Quick Actions" FontSize="16" FontAttributes="Bold" TextColor="#1E293B" />
+                    <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="15">
+                        <Frame Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="15">
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Frame BackgroundColor="#2373F4" WidthRequest="40" HeightRequest="40" CornerRadius="8" Padding="0" HasShadow="False">
+                                </Frame>
+                                <Label Text="Create&#x0a;Document" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="15">
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Frame BackgroundColor="#FAF5FF" WidthRequest="40" HeightRequest="40" CornerRadius="8" Padding="0" HasShadow="False">
+                                </Frame>
+                                <Label Text="Upload&#x0a;Document" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame Grid.Column="2" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="15">
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Frame BackgroundColor="#ECFDF5" WidthRequest="40" HeightRequest="40" CornerRadius="8" Padding="0" HasShadow="False">
+                                </Frame>
+                                <Label Text="Track&#x0a;Document" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame Grid.Column="3" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="15">
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Frame BackgroundColor="#F1F5F9" WidthRequest="40" HeightRequest="40" CornerRadius="8" Padding="0" HasShadow="False">
+                                </Frame>
+                                <Label Text="View&#x0a;Archive" FontSize="13" TextColor="#1E293B" FontAttributes="Bold" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <!-- Bottom Section: Recent & Expiry -->
+                <Grid ColumnDefinitions="2*, 1*" ColumnSpacing="20">
+
+                    <!-- Recent Documents -->
+                    <Frame Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                        <VerticalStackLayout Spacing="15">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Text="Recent Documents" FontSize="16" FontAttributes="Bold" TextColor="#1E293B" />
+                                <Label Grid.Column="1" Text="View All" FontSize="13" TextColor="#3B82F6" FontAttributes="Bold" />
+                            </Grid>
+
+                            <!-- Table Header -->
+                            <Grid ColumnDefinitions="2*, *, *, *" Padding="0,10,0,10">
+                                <Label Grid.Column="0" Text="Document Title" FontSize="12" TextColor="#94A3B8" FontAttributes="Bold"/>
+                                <Label Grid.Column="1" Text="Type" FontSize="12" TextColor="#94A3B8" FontAttributes="Bold"/>
+                                <Label Grid.Column="2" Text="Status" FontSize="12" TextColor="#94A3B8" FontAttributes="Bold"/>
+                                <Label Grid.Column="3" Text="Last Updated" FontSize="12" TextColor="#94A3B8" FontAttributes="Bold"/>
+                            </Grid>
+                            <BoxView HeightRequest="1" Color="#F1F5F9" />
+
+                            <!-- Row 1 -->
+                            <!-- Row 1 -->
+                            <Grid ColumnDefinitions="2*, *, *, *" Padding="0,10,0,10" VerticalOptions="Center">
+                                <HorizontalStackLayout Grid.Column="0" Spacing="10">
+                                    <Label Text="Contoh dokumen 1" FontSize="13" TextColor="#1E293B" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                                <Label Grid.Column="1" Text="HR" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                                <Frame Grid.Column="2" BackgroundColor="#FEF3C7" CornerRadius="12" Padding="8,4" HasShadow="False" HorizontalOptions="Start" VerticalOptions="Center">
+                                    <Label Text="• In-Approval" FontSize="11" TextColor="#D97706" FontAttributes="Bold" />
+                                </Frame>
+                                <Label Grid.Column="3" Text="2 hours ago" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            </Grid>
+                            <BoxView HeightRequest="1" Color="#F1F5F9" />
+
+                            <!-- Row 2 -->
+                            <Grid ColumnDefinitions="2*, *, *, *" Padding="0,10,0,10" VerticalOptions="Center">
+                                <HorizontalStackLayout Grid.Column="0" Spacing="10">
+                                    <Label Text="Contoh dokumen 2" FontSize="13" TextColor="#1E293B" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                                <Label Grid.Column="1" Text="Procurement" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                                <Frame Grid.Column="2" BackgroundColor="#D1FAE5" CornerRadius="12" Padding="8,4" HasShadow="False" HorizontalOptions="Start" VerticalOptions="Center">
+                                    <Label Text="• Approved" FontSize="11" TextColor="#059669" FontAttributes="Bold" />
+                                </Frame>
+                                <Label Grid.Column="3" Text="5 hours ago" FontSize="13" TextColor="#64748B" VerticalOptions="Center"/>
+                            </Grid>
+                            <BoxView HeightRequest="1" Color="#F1F5F9" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Upcoming Expiry & Quick Links -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="20">
+
+                        <!-- Upcoming Expiry -->
+                        <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                            <VerticalStackLayout Spacing="15">
+                                <Label Text="Upcoming Expiry" FontSize="16" FontAttributes="Bold" TextColor="#1E293B" />
+                                <Grid ColumnDefinitions="*, Auto" Padding="0,5">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="Contoh dokumen expired" FontSize="13" TextColor="#1E293B"/>
+                                    </HorizontalStackLayout>
+                                    <Label Grid.Column="1" Text="15 Jun 2025" FontSize="12" TextColor="#64748B"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Quick Links -->
+                        <!--       <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" BorderColor="Transparent" Padding="20">
+                            <VerticalStackLayout Spacing="15">
+                                <Label Text="Quick Links" FontSize="16" FontAttributes="Bold" TextColor="#1E293B" />
+                                <Grid ColumnDefinitions="*, Auto" Padding="0,5">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="✓"/>
+                                        <Label Text="My Approval Tasks" FontSize="13" TextColor="#1E293B"/>
+                                    </HorizontalStackLayout>
+                                    <Label Grid.Column="1" Text="23" FontSize="13" FontAttributes="Bold" TextColor="#3B82F6"/>
+                                </Grid>
+                                <HorizontalStackLayout Spacing="10" Padding="0,5">
+                                    <Label Text="⏱️"/>
+                                    <Label Text="Document Tracking" FontSize="13" TextColor="#1E293B"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="10" Padding="0,5">
+                                    <Label Text="📁"/>
+                                    <Label Text="Document Library" FontSize="13" TextColor="#1E293B"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>-->
+
+                    </VerticalStackLayout>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
